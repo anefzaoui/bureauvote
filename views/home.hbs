@@ -1,0 +1,55 @@
+<form action="/search">
+    <div class="flex flex-col items-center justify-center min-h-screen mx-4 my-8">
+        <div class="mb-6">
+            <img src="http://www.isie.tn/wp-content/uploads/2014/09/logo.png" alt="google Logo"
+                class="object-cover block" />
+
+        </div>
+        <div class="mb-2 text-2xl text-gray-700">إبحث عن مركز إقتراع</div>
+        <div class="mb-6 text-base text-gray-700 text-center mt-2">
+            <a href="#" id="sharebtn" class="text-blue-700">شارك هذه الصفحة</a>
+        </div>
+        <div class="flex items-center w-full mx-auto mb-4 border rounded-full lg:max-w-2xl hover:shadow-md">
+            <div class="pr-5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+            <input type="text" name="q" class="w-full bg-transparent rounded-full py-[14px] pr-4 outline-none" />
+
+        </div>
+        <div class="flex gap-x-6">
+            <button type="submit"
+                class="px-6 py-2 text-base rounded font-light cursor-pointer hover:shadow bg-gray-100">بحث</button>
+        </div>
+        <div class="mt-6">
+            <div class="text-sm hidden">
+                تم نطوير هذا الموقع: <span class="mr-2 text-blue-700">من طرف إتقان</span>
+            </div>
+            <div class="text-xs" dir="ltr">
+                With respect to all copyright laws, this website is not an official website of ISIE.
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<script>
+    var shareButton = document.querySelector('#sharebtn');
+    shareButton.addEventListener('click', e => {
+        e.preventDefault();
+        if (navigator.share) {
+            navigator.share({
+                title: '{{{title}}}',
+                url: 'window.location.href'
+            }).then(() => {
+                console.log('شكرا على مشاركة الصفحة!');
+            })
+                .catch(console.error);
+        } else {
+            // fallback
+        }
+    });
+</script>
