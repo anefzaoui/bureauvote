@@ -19,8 +19,8 @@
     <div class="bg-white rounded-md max-w-5xl w-full">
         <div>
             <div class="overflow-x-auto">
-                <div class="inline-block min-w-full border rounded-lg overflow-hidden">
-                    <table class="min-w-full leading-normal">
+                <div class="inline-block min-w-full md:border rounded-lg overflow-hidden">
+                    <table class="min-w-full leading-normal hidden md:block">
                         <thead>
                             <tr>
                                 <th
@@ -81,6 +81,80 @@
                             {{/each}}
                         </tbody>
                     </table>
+
+
+                    <div class="block md:hidden">
+                        {{#each result}}
+                        <table class="border rounded mb-4 w-full">
+                            <tr class="border-b border-gray-200 bg-white text-sm">
+                                <td class="px-2 py-2 bg-gray-100">
+                                    الولاية
+                                </td>
+                                <td class="p-2">
+                                    {{this.[0]}}
+                                </td>
+                            </tr>
+
+                            <tr class="border-b border-gray-200 bg-white text-sm">
+                                <td class="px-2 py-2 bg-gray-100">
+                                    الإدارة الفرعية	
+                                </td>
+                                <td class="p-2">
+                                    {{this.[1]}}
+                                </td>
+                            </tr>
+
+                            <tr class="border-b border-gray-200 bg-white text-sm">
+                                <td class="px-2 py-2 bg-gray-100">
+                                    المعتمدية
+                                </td>
+                                <td class="p-2">
+                                    {{this.[2]}}
+                                </td>
+                            </tr>
+
+                            <tr class="border-b border-gray-200 bg-white text-sm">
+                                <td class="px-2 py-2 bg-gray-100">
+                                    العمادة
+                                </td>
+                                <td class="p-2">
+                                    {{this.[3]}}
+                                </td>
+                            </tr>
+
+                            <tr class="border-b border-gray-200 bg-white text-sm">
+                                <td class="px-2 py-2 bg-gray-100">
+                                    مركز الإقتراع - عربية
+                                </td>
+                                <td class="p-2">
+                                    {{this.[4]}}
+                                </td>
+                            </tr>
+
+                            <tr class="border-b border-gray-200 bg-white text-sm">
+                                <td class="px-2 py-2 bg-gray-100">
+                                    مركز الإقتراع - فرنسية	
+                                </td>
+                                <td class="p-2">
+                                    {{this.[5]}}
+                                </td>
+                            </tr>
+
+                            <tr class="border-b border-gray-200 bg-white text-sm">
+                                <td class="px-2 py-2 bg-gray-100">
+                                    CODE USSD
+                                </td>
+                                <td class="p-2">
+                                    {{this.[6]}}
+                                </td>
+                            </tr>
+                        </table>
+
+                        {{/each}}
+
+                    </div>
+
+
 
                 </div>
             </div>
