@@ -26,6 +26,7 @@ app.get('/', (req, res) => {
 
 app.get('/search', (req, res) => {
     let q = req.query.q;
+    let qT = q.toUpperCase();
     if (q == null || q == undefined || q.length < 4) {
         res.render('search_error', {
             title: 'قاعدة بيانات مراكز الإقتراع - لا يوجد نائج',
@@ -33,7 +34,7 @@ app.get('/search', (req, res) => {
             layout: 'main'
         });
     } else {
-        let result = vote.filter(element => (element[0].includes(q) || element[1].includes(q) || element[2].includes(q) || element[3].includes(q) || element[4].includes(q) || element[5].includes(q) || element[6].includes(q)))
+        let result = vote.filter(element => (element[0].includes(qT) || element[1].includes(qT) || element[2].includes(qT) || element[3].includes(qT) || element[4].includes(qT) || element[5].includes(qT) || element[6].includes(qT)))
         //console.log(result);
 
         if (result.length > 0) {
