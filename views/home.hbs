@@ -43,7 +43,7 @@
         if (navigator.share) {
             navigator.share({
                 title: '{{{title}}}',
-                url: 'window.location.href'
+                url: window.location.href
             }).then(() => {
                 console.log('شكرا على مشاركة الصفحة!');
             })
