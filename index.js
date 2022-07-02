@@ -46,7 +46,7 @@ app.get('/search', (req, res) => {
             layout: 'main'
         });
     } else {
-        let result = vote.filter(element => (element[0].contains(qT) || element[1].contains(qT) || element[2].contains(qT) || element[3].contains(qT) || element[4].contains(qT) || element[5].contains(qT) || element[6].contains(qT)))
+        let result = vote.filter(element => element.join().contains(qT))
 
         if (result.length > 0) {
             res.render('search', {
