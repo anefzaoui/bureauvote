@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center justify-center mx-4 my-8">
+<div class="flex flex-col items-center justify-center mx-4 my-8 pt-8">
     <a href="/" class="block mb-6">
         <img src="/img/logo.png" alt="google Logo"
             class="object-cover block" />
@@ -9,10 +9,26 @@
     </div>
     <div class="mb-6 text-base text-gray-700">نتائج البحث عن مركز إقتراع بالجملة بالكالمات المفاتاح التالية:
         <b>{{keyword}}</b>
-        <div class="text-center mt-2">
-            <a href="#" id="sharebtn" class="text-blue-700">شارك نتيجة البحث</a>
-            <span class="px-1">|</span>
-            <a href="/" class="text-blue-700">إبحث مرة أخرى</a>
+        <div class="text-center mt-3 flex justify-center content-center items-center">
+            <a href="#" id="sharebtn"
+                class="inline-flex items-center px-6 py-2 text-gray-500 bg-gray-200 rounded-md hover:bg-gray-300 hover:text-gray-700 mx-1">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4 ml-2" fill="currentColor">
+                        <path
+                            d="M503.7 226.2l-176 151.1c-15.38 13.3-39.69 2.545-39.69-18.16V272.1C132.9 274.3 66.06 312.8 111.4 457.8c5.031 16.09-14.41 28.56-28.06 18.62C39.59 444.6 0 383.8 0 322.3c0-152.2 127.4-184.4 288-186.3V56.02c0-20.67 24.28-31.46 39.69-18.16l176 151.1C514.8 199.4 514.8 216.6 503.7 226.2z" />
+                    </svg>
+                </span>
+                <span>شارك الموقع
+            <a href="#"
+                class="inline-flex items-center px-6 py-2 text-gray-500 bg-gray-200 rounded-md hover:bg-gray-300 hover:text-gray-700 mx-1">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4 ml-2" fill="currentColor">
+                        <path
+                            d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z" />
+                    </svg>
+                </span>
+                <span>إبحث مرة أخرى</span>
+            </a>
         </div>
     </div>
 
@@ -31,3 +47,21 @@
         </div>
 
     </div>
+
+    <script>
+        var shareButton = document.querySelector('#sharebtn');
+        shareButton.addEventListener('click', e => {
+            e.preventDefault();
+            if (navigator.share) {
+                navigator.share({
+                    title: 'قاعدة بيانات مراكز الإقتراع - إبحث عن مركز إقتراع',
+                    url: 'https://bureauvote.tn/'
+                }).then(() => {
+                    console.log('شكرا على مشاركة الصفحة!');
+                })
+                    .catch(console.error);
+            } else {
+                // fallback
+            }
+        });
+    </script>
