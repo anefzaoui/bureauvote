@@ -5,6 +5,23 @@ const app = express()
 const port = 3000
 var vote = require('./vote.json');
 
+
+String.prototype.contains = function(string){    
+    var keywords = string.split(" ");
+    var contain = true;
+
+    for(var i = 0; i < keywords.length && contain; i++){
+        if(keywords[i] == "") continue;
+
+        var regex = new RegExp(keywords[i], "i");
+        contain = contain && regex.test(this);
+    }
+
+    return contain;
+}
+
+
+
 app.use(express.static('public'))
 
 
@@ -34,7 +51,7 @@ app.get('/search', (req, res) => {
             layout: 'main'
         });
     } else {
-        let result = vote.filter(element => (element[0].includes(qT) || element[1].includes(qT) || element[2].includes(qT) || element[3].includes(qT) || element[4].includes(qT) || element[5].includes(qT) || element[6].includes(qT)))
+        let result = vote.filter(element => (element[0].contains(qT) || element[1].contains(qT) || element[2].contains(qT) || element[3].contains(qT) || element[4].contains(qT) || element[5].contains(qT) || element[6].contains(qT)))
         //console.log(result);
 
         if (result.length > 0) {
