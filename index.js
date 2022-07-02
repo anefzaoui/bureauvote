@@ -51,7 +51,7 @@ app.get('/search', (req, res) => {
     if (q == null || q == undefined || qT.length < 4) {
         res.render('search_error', {
             title: 'قاعدة بيانات مراكز الإقتراع - لا يوجد نائج',
-            error: "رجاءا أدخل أكثر من 4 حروف أو أرقام في خانة البحث",
+            error: "رجاءً أدخل أكثر من 4 حروف أو أرقام في خانة البحث",
             layout: 'main'
         });
     } else {
