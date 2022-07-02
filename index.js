@@ -26,8 +26,8 @@ app.get('/', (req, res) => {
 
 app.get('/search', (req, res) => {
     let q = req.query.q;
-    let qT = q.toUpperCase();
-    if (q == null || q == undefined || q.length < 4) {
+    let qT = q.toUpperCase().replace('مدرسة','').replace('مكتب','').trim();
+    if (qT == null || qT == undefined || qT.length < 4) {
         res.render('search_error', {
             title: 'قاعدة بيانات مراكز الإقتراع - لا يوجد نائج',
             error: "رجاءا أدخل أكثر من 4 حروف أو أرقام في خانة البحث",
