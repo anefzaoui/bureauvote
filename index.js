@@ -38,7 +38,16 @@ app.get('/', (req, res) => {
 
 app.get('/search', (req, res) => {
     let q = req.query.q || '';
-    let qT = q.toUpperCase().replace('مدرسة', '').replace('مكتب', '').trim();
+    let qT = q.toUpperCase()
+    .replace('المدرسة', '')
+    .replace('مدرسة', '')
+    .replace('الإبتدائية', '')
+    .replace('إبتدائية', '')
+    .replace('الابتدائية', '')
+    .replace('ابتدائية', '')
+    .replace('المكتب', '')
+    .replace('مكتب', '')
+    .trim();
     if (q == null || q == undefined || qT.length < 4) {
         res.render('search_error', {
             title: 'قاعدة بيانات مراكز الإقتراع - لا يوجد نائج',
