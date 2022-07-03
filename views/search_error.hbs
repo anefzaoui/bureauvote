@@ -45,21 +45,21 @@
         {{> footer }}
 
     </div>
-
-    <script>
-        var shareButton = document.querySelector('#sharebtn');
-        shareButton.addEventListener('click', e => {
-            e.preventDefault();
-            if (navigator.share) {
-                navigator.share({
-                    title: 'قاعدة بيانات مراكز الإقتراع - إبحث عن مركز إقتراع',
-                    url: 'https://bureauvote.tn/'
-                }).then(() => {
-                    console.log('شكرا على مشاركة الصفحة!');
-                })
-                    .catch(console.error);
-            } else {
-                // fallback
-            }
-        });
-    </script>
+</div>
+<script>
+    var shareButton = document.querySelector('#sharebtn');
+    shareButton.addEventListener('click', e => {
+        e.preventDefault();
+        if (navigator.share) {
+            navigator.share({
+                title: 'قاعدة بيانات مراكز الإقتراع - إبحث عن مركز إقتراع',
+                url: 'https://bureauvote.tn/'
+            }).then(() => {
+                console.log('شكرا على مشاركة الصفحة!');
+            })
+                .catch(console.error);
+        } else {
+            // fallback
+        }
+    });
+</script>
