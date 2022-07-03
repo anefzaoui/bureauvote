@@ -2,7 +2,7 @@
     <a href="/" class="mb-6">
         <img src="/img/logo.png" alt="google Logo" class="object-cover block" />
     </a>
-    <div class="text-center mb-8 mt-3 flex justify-center content-center items-center">
+    <div class="text-center mb-2 mt-3 flex justify-center content-center items-center">
         <a href="#" id="sharebtn"
             class="inline-flex items-center px-6 py-2 text-slate-500 bg-slate-200 rounded-md hover:bg-slate-300 hover:text-slate-700 mx-1">
             <span>
@@ -23,6 +23,12 @@
             </span>
             <span class="text-sm md:text-base">إبحث عن مركز</span>
         </a>
+    </div>
+    <div class="mb-8 mt-4 flex items-center content-center justify-center">
+        <div class="fb-share-button" data-href="https://bureauvote.tn/" data-layout="button_count" data-size="large"><a
+                target="_blank"
+                href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbureauvote.tn%2F&amp;src=sdkpreparse"
+                class="fb-xfbml-parse-ignore">شارك</a></div>
     </div>
     <h1 class="text-2xl text-center font-bold mb-4">حول الموقع</h1>
     <p class="text-justify mb-4">
@@ -47,7 +53,7 @@
         e.preventDefault();
         if (navigator.share) {
             navigator.share({
-                title: 'قاعدة بيانات مراكز الإقتراع - إبحث عن مركز إقتراع',
+                title: '{{{title}}}',
                 url: 'https://bureauvote.tn/'
             }).then(() => {
                 console.log('شكرا على مشاركة الصفحة!');
