@@ -46,6 +46,11 @@ app.get("/search", (req, res) => {
     .replace("ابتدائية", "")
     .replace("المكتب", "")
     .replace("مكتب", "")
+    .replace("الولاية", "")
+    .replace("ولاية", "")
+    .replace("المعتمدية", "")
+    .replace("معتمدية", "")
+    .replace("ڨ", "ق")
     .trim();
   if (q == null || q == undefined || qT.length < 4) {
     res.render("search_error", {
