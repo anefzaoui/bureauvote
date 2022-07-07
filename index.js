@@ -35,6 +35,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/search", (req, res) => {
+  let fld = req.query.fld || "";
   let q = req.query.q || "";
   let qT = q
     .toUpperCase()
@@ -52,30 +53,58 @@ app.get("/search", (req, res) => {
     .replace("معتمدية", "")
     .replace("ڨ", "ق")
     .trim();
-  if (q == null || q == undefined || qT.length < 4) {
+
+  if (Object.keys(req.query).length !== 0) {
+    if (q !== "" && q.length > 3) {
+      if (fld !== "") {
+        let resFld = vote.filter((element) => element[fld] === q);
+        if (resFld.length > 0) {
+          res.render("search", {
+            title: "مكتب الإقتراع بعنوان " + q,
+            keyword: req.query.q,
+            result: resFld,
+            layout: "main",
+          });
+        } else {
+          res.render("search_error", {
+            title: "لا يوجد نتائج بعنوان " + q,
+            keyword: req.query.q,
+            error: "لا يوجد نتائج",
+            layout: "main",
+          });
+        }
+      } else {
+        let result = vote.filter((element) => element.join().contains(qT));
+
+        if (result.length > 0) {
+          res.render("search", {
+            title: "مكتب الإقتراع بعنوان " + q,
+            keyword: req.query.q,
+            result: result,
+            layout: "main",
+          });
+        } else {
+          res.render("search_error", {
+            title: "لا يوجد نتائج بعنوان " + q,
+            keyword: req.query.q,
+            error: "لا يوجد نتائج",
+            layout: "main",
+          });
+        }
+      }
+    } else {
+      res.render("search_error", {
+        title: "لا يوجد نائج - قاعدة بيانات مراكز الإقتراع",
+        error: "رجاءً أدخل أكثر من 4 حروف أو أرقام في خانة البحث",
+        layout: "main",
+      });
+    }
+  } else {
     res.render("search_error", {
       title: "لا يوجد نائج - قاعدة بيانات مراكز الإقتراع",
       error: "رجاءً أدخل أكثر من 4 حروف أو أرقام في خانة البحث",
       layout: "main",
     });
-  } else {
-    let result = vote.filter((element) => element.join().contains(qT));
-
-    if (result.length > 0) {
-      res.render("search", {
-        title: "مكتب الإقتراع بعنوان " + q,
-        keyword: req.query.q,
-        result: result,
-        layout: "main",
-      });
-    } else {
-      res.render("search_error", {
-        title: "لا يوجد نتائج بعنوان " + q,
-        keyword: req.query.q,
-        error: "لا يوجد نتائج",
-        layout: "main",
-      });
-    }
   }
 });
 
