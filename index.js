@@ -52,6 +52,8 @@ app.get("/search", (req, res) => {
     .replace("المعتمدية", "")
     .replace("معتمدية", "")
     .replace("ڨ", "ق")
+    .replace("أ", "ا")
+    .replace("إ", "ا")
     .trim();
 
   if (Object.keys(req.query).length !== 0) {
@@ -127,6 +129,8 @@ app.get("/api", (req, res) => {
     .replace("المعتمدية", "")
     .replace("معتمدية", "")
     .replace("ڨ", "ق")
+    .replace("أ", "ا")
+    .replace("إ", "ا")
     .trim();
 
   if (Object.keys(req.query).length !== 0) {
