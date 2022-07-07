@@ -108,6 +108,53 @@ app.get("/search", (req, res) => {
   }
 });
 
+
+app.get("/api", (req, res) => {
+  let fld = req.query.fld || "";
+  let q = req.query.q || "";
+  let qT = q
+    .toUpperCase()
+    .replace("المدرسة", "")
+    .replace("مدرسة", "")
+    .replace("الإبتدائية", "")
+    .replace("إبتدائية", "")
+    .replace("الابتدائية", "")
+    .replace("ابتدائية", "")
+    .replace("المكتب", "")
+    .replace("مكتب", "")
+    .replace("الولاية", "")
+    .replace("ولاية", "")
+    .replace("المعتمدية", "")
+    .replace("معتمدية", "")
+    .replace("ڨ", "ق")
+    .trim();
+
+  if (Object.keys(req.query).length !== 0) {
+    if (q !== "" && q.length > 3) {
+      if (fld !== "") {
+        let resFld = vote.filter((element) => element[fld] === q);
+        if (resFld.length > 0) {
+          res.json(resFld);
+        } else {
+          res.json([]);
+        }
+      } else {
+        let result = vote.filter((element) => element.join().contains(qT));
+
+        if (result.length > 0) {
+          res.json(result);
+        } else {
+          res.json([]);
+        }
+      }
+    } else {
+      res.json([]);
+    }
+  } else {
+    res.json([]);
+  }
+});
+
 app.get("/about", (req, res) => {
   res.render("about", {
     title: "حول الموقع - قاعدة بيانات مراكز الإقتراع",
