@@ -16,6 +16,27 @@ String.prototype.contains = function (string) {
   return contain;
 };
 
+function cleanUpSearchTerm(str) {
+  return str.toUpperCase()
+    .replace("المدرسة", "")
+    .replace("مدرسة", "")
+    .replace("الإبتدائية", "")
+    .replace("إبتدائية", "")
+    .replace("الابتدائية", "")
+    .replace("ابتدائية", "")
+    .replace("المكتب", "")
+    .replace("مكتب", "")
+    .replace("الولاية", "")
+    .replace("ولاية", "")
+    .replace("المعتمدية", "")
+    .replace("معتمدية", "")
+    .replace("ڨ", "ق")
+    .replace("أ", "ا")
+    .replace("إ", "ا")
+    .replace("بال", "ال")
+    .trim();
+};
+
 app.use(express.static("public"));
 app.engine(
   "hbs",
@@ -37,24 +58,7 @@ app.get("/", (req, res) => {
 app.get("/search", (req, res) => {
   let fld = req.query.fld || "";
   let q = req.query.q || "";
-  let qT = q
-    .toUpperCase()
-    .replace("المدرسة", "")
-    .replace("مدرسة", "")
-    .replace("الإبتدائية", "")
-    .replace("إبتدائية", "")
-    .replace("الابتدائية", "")
-    .replace("ابتدائية", "")
-    .replace("المكتب", "")
-    .replace("مكتب", "")
-    .replace("الولاية", "")
-    .replace("ولاية", "")
-    .replace("المعتمدية", "")
-    .replace("معتمدية", "")
-    .replace("ڨ", "ق")
-    .replace("أ", "ا")
-    .replace("إ", "ا")
-    .trim();
+  let qT = cleanUpSearchTerm(q);
 
   if (Object.keys(req.query).length !== 0) {
     if (q !== "" && q.length > 3) {
@@ -114,24 +118,7 @@ app.get("/search", (req, res) => {
 app.get("/api", (req, res) => {
   let fld = req.query.fld || "";
   let q = req.query.q || "";
-  let qT = q
-    .toUpperCase()
-    .replace("المدرسة", "")
-    .replace("مدرسة", "")
-    .replace("الإبتدائية", "")
-    .replace("إبتدائية", "")
-    .replace("الابتدائية", "")
-    .replace("ابتدائية", "")
-    .replace("المكتب", "")
-    .replace("مكتب", "")
-    .replace("الولاية", "")
-    .replace("ولاية", "")
-    .replace("المعتمدية", "")
-    .replace("معتمدية", "")
-    .replace("ڨ", "ق")
-    .replace("أ", "ا")
-    .replace("إ", "ا")
-    .trim();
+  let qT = cleanUpSearchTerm(q);
 
   if (Object.keys(req.query).length !== 0) {
     if (q !== "" && q.length > 3) {
