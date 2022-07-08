@@ -4,6 +4,26 @@ const app = express();
 const port = 3000;
 const vote = require("./vote.json");
 
+app.use(
+  require("express-status-monitor")({
+    title: "Bureau Vote Status", // Default title
+    theme: "default.css", // Default styles
+    path: "/admin/site_status",
+    chartVisibility: {
+      cpu: true,
+      mem: true,
+      load: true,
+      eventLoop: true,
+      heap: true,
+      responseTime: true,
+      rps: true,
+      statusCodes: true,
+    },
+    healthChecks: [],
+    ignoreStartsWith: "/admin",
+  })
+);
+
 String.prototype.contains = function (string) {
   var keywords = string.split(" ");
   var contain = true;
