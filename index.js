@@ -46,6 +46,7 @@ function cleanUpSearchTerm(str) {
     .replace("المعهد", "")
     .replace("معهد", "")
 
+    .replace("ننهج", "نهج")
     .replace("ڨ", "ق")
     .replace("أ", "ا")
     .replace("إ", "ا")
