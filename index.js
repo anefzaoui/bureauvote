@@ -17,25 +17,38 @@ String.prototype.contains = function (string) {
 };
 
 function cleanUpSearchTerm(str) {
-  return str.toUpperCase()
+  return str
+    .toUpperCase()
+    .replace(/(\d+)/g, function (_, num) {
+      return " " + num + " ";
+    })
     .replace("المدرسة", "")
     .replace("مدرسة", "")
+
     .replace("الإبتدائية", "")
     .replace("إبتدائية", "")
+
+    .replace("الابتدايية", "")
+    .replace("ابتدايية", "")
+
     .replace("الابتدائية", "")
     .replace("ابتدائية", "")
+
     .replace("المكتب", "")
     .replace("مكتب", "")
+
     .replace("الولاية", "")
     .replace("ولاية", "")
+
     .replace("المعتمدية", "")
     .replace("معتمدية", "")
+
     .replace("ڨ", "ق")
     .replace("أ", "ا")
     .replace("إ", "ا")
     .replace("بال", "ال")
     .trim();
-};
+}
 
 app.use(express.static("public"));
 app.engine(
@@ -113,7 +126,6 @@ app.get("/search", (req, res) => {
     });
   }
 });
-
 
 app.get("/api", (req, res) => {
   let fld = req.query.fld || "";
