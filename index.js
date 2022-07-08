@@ -43,6 +43,9 @@ function cleanUpSearchTerm(str) {
     .replace("المعتمدية", "")
     .replace("معتمدية", "")
 
+    .replace("المعهد", "")
+    .replace("معهد", "")
+
     .replace("ڨ", "ق")
     .replace("أ", "ا")
     .replace("إ", "ا")
