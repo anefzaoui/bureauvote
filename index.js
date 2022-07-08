@@ -61,7 +61,7 @@ app.get("/search", (req, res) => {
   let qT = cleanUpSearchTerm(q);
 
   if (Object.keys(req.query).length !== 0) {
-    if (q !== "" && q.length > 3) {
+    if (q !== "" && q.length > 2) {
       if (fld !== "") {
         let resFld = vote.filter((element) => element[fld] === q);
         if (resFld.length > 0) {
@@ -121,7 +121,7 @@ app.get("/api", (req, res) => {
   let qT = cleanUpSearchTerm(q);
 
   if (Object.keys(req.query).length !== 0) {
-    if (q !== "" && q.length > 3) {
+    if (q !== "" && q.length > 2) {
       if (fld !== "") {
         let resFld = vote.filter((element) => element[fld] === q);
         if (resFld.length > 0) {
