@@ -182,6 +182,16 @@ app.get("/api", (req, res) => {
   }
 });
 
+app.get("/alldatasets", (req, res) => {
+  res.render("search", {
+    title: "جميع بيانات محرك البحث",
+    keyword: "",
+    result: vote,
+    layout: "main",
+  });
+});
+
+
 app.get("/about", (req, res) => {
   res.render("about", {
     title: "حول الموقع - قاعدة بيانات مراكز الإقتراع",
