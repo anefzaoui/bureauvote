@@ -75,6 +75,7 @@ function cleanUpSearchTerm(str) {
 }
 
 app.use(express.static("public"));
+
 app.engine(
   "hbs",
   hbs.express4({
@@ -82,6 +83,7 @@ app.engine(
     layoutsDir: __dirname + "/views/layouts",
   })
 );
+
 app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
 
@@ -103,7 +105,7 @@ app.get("/search", (req, res) => {
         let resFld = vote.filter((element) => element[fld] === q);
         if (resFld.length > 0) {
           res.render("search", {
-            title: "مكتب الإقتراع بعنوان " + q,
+            title: "مراكز الإقتراع بعنوان " + q,
             keyword: req.query.q,
             result: resFld,
             layout: "main",
@@ -121,7 +123,7 @@ app.get("/search", (req, res) => {
 
         if (result.length > 0) {
           res.render("search", {
-            title: "مكتب الإقتراع بعنوان " + q,
+            title: "مراكز الإقتراع بعنوان " + q,
             keyword: req.query.q,
             result: result,
             layout: "main",
@@ -190,7 +192,6 @@ app.get("/alldatasets", (req, res) => {
     layout: "main",
   });
 });
-
 
 app.get("/about", (req, res) => {
   res.render("about", {
