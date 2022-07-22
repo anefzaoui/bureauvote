@@ -1,38 +1,72 @@
 const express = require("express");
 const hbs = require("express-hbs");
-const requestIp = require('request-ip');
+const requestIp = require("request-ip");
+var moment = require("moment");
+
 const app = express();
 const port = 3000;
 const vote = require("./vote.json");
 
 // initial test
-var BLACKLIST = ["41.225.16.242"];
-
-var getClientIp = function (req) {
-  var ipAddress = req.socket.remoteAddress;
-  if (!ipAddress) {
-    return "";
-  }
-  // convert from "::ffff:192.0.0.1"  to "192.0.0.1"
-  if (ipAddress.substr(0, 7) == "::ffff:") {
-    ipAddress = ipAddress.substr(7);
-  }
-  return ipAddress;
-};
+var BLACKLIST = ["41.225.16.242", "197.1.197.224"];
 
 app.use(function (req, res, next) {
   var ipAddress = requestIp.getClientIp(req);
+  var timestamps = moment().format("YYYY-MM-DD HH:mm:ss");
+
   if (BLACKLIST.indexOf(ipAddress) === -1) {
+    console.log("NORMAL IP VISIT: " + timestamps + " : " + ipAddress);
     next();
   } else {
+    console.log(
+      "!!!!!!!!!! BANNED IP VISIT: " + timestamps + " : " + ipAddress
+    );
     res.send(`
-    <h1 dir="rtl">
-    عفوا، لاحظنا أن عنوان الـ IP هذا (${ipAddress}) والراجع بالنظر لمنظمة 3S INF يقوم بتفحص الموقع بصفة دورية حتى بعد إنتهاء الآجال القانونية لتحيين مراكز الإقتراع.
-    <br/>
-    إذا كانت الغاية من الزيارة التحقق من قاعدة البيانات أو الحصول على معلومات بخصوص تطوير الموقع أو قاعدة البيانات الخاصة به، برجاء الإتصال عبر البريد الإلكتروني nefzaoui.a@gmail.com
-    <br/>
-    شكرا
-    </h1>
+    <!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>BANNED.</title>
+      </head>
+      <body>
+        <h1 dir="rtl">
+          عفوا، لاحظنا أن عنوان الـ IP هذا (${ipAddress}) والراجع بالنظر لمنظمة 3S
+          INF يقوم بتفحص الموقع بصفة دورية حتى بعد إنتهاء الآجال القانونية لتحيين
+          مراكز الإقتراع.
+          <br />
+          إذا كانت الغاية من الزيارة التحقق من قاعدة البيانات أو الحصول على معلومات
+          بخصوص تطوير الموقع أو قاعدة البيانات الخاصة به، برجاء الإتصال عبر البريد
+          الإلكتروني nefzaoui.a@gmail.com
+          <br />
+          شكرا
+        </h1>
+
+        <!-- Default Statcounter code for bureauvote https://bureauvote.tn/ -->
+        <script type="text/javascript">
+          var sc_project = 12770555;
+          var sc_invisible = 1;
+          var sc_security = "c63d2e1d";
+        </script>
+        <script
+          type="text/javascript"
+          src="https://www.statcounter.com/counter/counter.js"
+          async
+        ></script>
+        <noscript
+          ><div class="statcounter">
+            <a title="Web Analytics" href="https://statcounter.com/" target="_blank"
+              ><img
+                class="statcounter"
+                src="https://c.statcounter.com/12770555/0/c63d2e1d/1/"
+                alt="Web Analytics"
+                referrerpolicy="no-referrer-when-downgrade"
+            /></a></div
+        ></noscript>
+        <!-- End of Statcounter Code -->
+      </body>
+    </html>
     `);
   }
 });
@@ -121,7 +155,7 @@ app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
 
 app.get("/", (req, res) => {
-  const clientIp = requestIp.getClientIp(req); 
+  const clientIp = requestIp.getClientIp(req);
   console.log(clientIp);
 
   res.render("home", {
