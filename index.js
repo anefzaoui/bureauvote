@@ -6,7 +6,7 @@ const port = 3000;
 const vote = require("./vote.json");
 
 // initial test
-var BLACKLIST = ["102.157.167.169"];
+var BLACKLIST = ["41.225.16.242"];
 
 var getClientIp = function (req) {
   var ipAddress = req.socket.remoteAddress;
@@ -123,7 +123,7 @@ app.set("views", __dirname + "/views");
 app.get("/", (req, res) => {
   const clientIp = requestIp.getClientIp(req); 
   console.log(clientIp);
-  
+
   res.render("home", {
     title: "قاعدة بيانات مراكز الإقتراع في تونس والخارج",
     layout: "main",
