@@ -1,5 +1,6 @@
 const express = require("express");
 const hbs = require("express-hbs");
+const requestIp = require('request-ip');
 const app = express();
 const port = 3000;
 const vote = require("./vote.json");
@@ -20,7 +21,7 @@ var getClientIp = function (req) {
 };
 
 app.use(function (req, res, next) {
-  var ipAddress = getClientIp(req);
+  var ipAddress = requestIp.getClientIp(req);
   if (BLACKLIST.indexOf(ipAddress) === -1) {
     next();
   } else {
@@ -120,7 +121,9 @@ app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
 
 app.get("/", (req, res) => {
-  console.log(req.socket.remoteAddress);
+  const clientIp = requestIp.getClientIp(req); 
+  console.log(clientIp);
+  
   res.render("home", {
     title: "قاعدة بيانات مراكز الإقتراع في تونس والخارج",
     layout: "main",
