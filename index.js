@@ -4,6 +4,38 @@ const app = express();
 const port = 3000;
 const vote = require("./vote.json");
 
+// initial test
+var BLACKLIST = ["102.157.167.169"];
+
+var getClientIp = function (req) {
+  var ipAddress = req.socket.remoteAddress;
+  if (!ipAddress) {
+    return "";
+  }
+  // convert from "::ffff:192.0.0.1"  to "192.0.0.1"
+  if (ipAddress.substr(0, 7) == "::ffff:") {
+    ipAddress = ipAddress.substr(7);
+  }
+  return ipAddress;
+};
+
+app.use(function (req, res, next) {
+  var ipAddress = getClientIp(req);
+  if (BLACKLIST.indexOf(ipAddress) === -1) {
+    next();
+  } else {
+    res.send(`
+    <h1 dir="rtl">
+    عفوا، لاحظنا أن عنوان الـ IP هذا (${ipAddress}) والراجع بالنظر لمنظمة 3S INF يقوم بتفحص الموقع بصفة دورية حتى بعد إنتهاء الآجال القانونية لتحيين مراكز الإقتراع.
+    <br/>
+    إذا كانت الغاية من الزيارة التحقق من قاعدة البيانات أو الحصول على معلومات بخصوص تطوير الموقع أو قاعدة البيانات الخاصة به، برجاء الإتصال عبر البريد الإلكتروني nefzaoui.a@gmail.com
+    <br/>
+    شكرا
+    </h1>
+    `);
+  }
+});
+
 app.use(
   require("express-status-monitor")({
     title: "Bureau Vote Status", // Default title
@@ -88,6 +120,7 @@ app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
 
 app.get("/", (req, res) => {
+  console.log(req.socket.remoteAddress);
   res.render("home", {
     title: "قاعدة بيانات مراكز الإقتراع في تونس والخارج",
     layout: "main",
